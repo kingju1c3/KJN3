@@ -137,7 +137,7 @@ npm run test:coverage      # Coverage report
 
 ### Reporting Issues
 
-- Email: juice.walton@icloud.com
+- Email: support@consciousconnection.com
 - Do NOT create public issues
 - Include reproduction steps
 
