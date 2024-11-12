@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: Decentralized Network API
+  version: 1.0.0
+  description: API for the decentralized network communication system
+
+servers:
+  - url: https://api.network.example.com/v1
+    description: Production server
+  - url: http://localhost:3000/.netlify/functions
+    description: Local development
+
+paths:
+  /node-status:
+    get:
+      summary: Get node status
+      parameters:
+        - name: nodeId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Node status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeStatus'
+
+  /network-metrics:
+    get:
+      summary: Get network performance metrics
+      parameters:
+        - name: start
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Network metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkMetrics'
+
+components:
+  schemas:
+    NodeStatus:
+      type: object
+      properties:
+        nodeId:
+          type: string
+        status:
+          type: string
+          enum: [active, idle, offline]
+        lastSeen:
+          type: string
+          format: date-time
+        metrics:
+          type: object
+          properties:
+            cpu:
+              type: number
+            memory:
+              type: number
+            network:
+              type: number
+
+    NetworkMetrics:
+      type: object
+      properties:
+        activeNodes:
+          type: number
+        metrics:
+          type: object
+          properties:
+            throughput:
+              $ref: '#/components/schemas/MetricData'
+            latency:
+              $ref: '#/components/schemas/MetricData'
+            reliability:
+              $ref: '#/components/schemas/MetricData'
+
+    MetricData:
+      type: object
+      properties:
+        current:
+          type: number
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              value:
+                type: number
