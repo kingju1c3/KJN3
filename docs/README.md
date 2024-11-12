@@ -137,7 +137,7 @@ npm run test:coverage      # Coverage report
 
 ### Reporting Issues
 
-- Email: security@example.com
+- Email: juice.walton@icloud.com
 - Do NOT create public issues
 - Include reproduction steps
 
